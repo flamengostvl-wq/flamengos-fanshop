@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlaMENgos Fanshop | TV 1886 Langenselbold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #ff2d8b;
+      --pink-light: #ff6bb3;
+      --black: #0a0a0a;
+      --dark: #141414;
+      --gray: #1f1f1f;
+      --light: #f5f5f5;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--black);
+      color: var(--light);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--pink);
+      padding: 0.8rem 1.5rem;
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: white; }
+    .logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 1px; color: var(--pink); }
+    .logo-text span { color: white; }
+    nav { display: flex; gap: 1.5rem; align-items: center; }
+    nav a { color: white; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; position: relative; }
+    nav a:hover { color: var(--pink); }
+    nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--pink); transition: width 0.2s; }
+    nav a:hover::after { width: 100%; }
+    .ig-link { display: flex; align-items: center; gap: 0.35rem; color: white; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+    .ig-link:hover { color: var(--pink); }
+    .cart-btn {
+      background: var(--pink); color: white; border: none; padding: 0.5rem 1rem; border-radius: 50px;
+      font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 0.4rem;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .cart-btn:hover { background: var(--pink-light); transform: scale(1.05); }
+    .cart-count {
+      background: white; color: var(--pink); font-size: 0.75rem; font-weight: 800;
+      width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+    .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+    .hero {
+      position: relative; padding: 4rem 1.5rem 5rem; text-align: center;
+      background: linear-gradient(180deg, #1a0a14 0%, var(--black) 100%); overflow: hidden;
+    }
+    .hero::before { content: '🦩'; position: absolute; font-size: 20rem; opacity: 0.04; top: -2rem; right: -4rem; transform: rotate(15deg); pointer-events: none; }
+    .hero-badge {
+      display: inline-block; background: rgba(255, 45, 139, 0.15); border: 1px solid var(--pink);
+      color: var(--pink); padding: 0.35rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.2rem; letter-spacing: 0.5px;
+    }
+    .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 8vw, 5rem); line-height: 1; margin-bottom: 0.8rem; letter-spacing: 2px; }
+    .hero h1 .pink { color: var(--pink); }
+    .hero p { font-size: 1.15rem; color: #bbb; max-width: 560px; margin: 0 auto 2rem; }
+    .hero-cta { display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.8rem; border-radius: 50px;
+      font-weight: 700; font-size: 1rem; text-decoration: none; cursor: pointer; border: none; transition: all 0.25s;
+    }
+    .btn-primary { background: var(--pink); color: white; }
+    .btn-primary:hover { background: var(--pink-light); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 45, 139, 0.4); }
+    .btn-outline { background: transparent; color: white; border: 2px solid var(--pink); }
+    .btn-outline:hover { background: var(--pink); transform: translateY(-2px); }
+    section { padding: 4rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 2.5rem; }
+    .section-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    .section-header p { color: #999; font-size: 1.05rem; }
+    .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .product-card {
+      background: var(--gray); border-radius: 16px; overflow: hidden; border: 1px solid #2a2a2a;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; display: flex; flex-direction: column;
+    }
+    .product-card:hover { transform: translateY(-6px); border-color: var(--pink); box-shadow: 0 12px 40px rgba(255, 45, 139, 0.15); }
+    
+    /* ===== SHOPIFY IMAGE SLOT ===== */
+    .product-img {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background: #111;
+      overflow: hidden;
+    }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .product-card:hover .product-img img {
+      transform: scale(1.05);
+    }
+    /* Fallback when no image is set */
+    .product-img .fallback {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+      z-index: 1;
+    }
+    .product-img img[src]:not([src=""]) + .fallback {
+      display: none;
+    }
+    .product-img .fallback .emoji { font-size: 4rem; line-height: 1; }
+    .product-img .fallback .label {
+      font-size: 0.8rem; color: #666; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .product-badge {
+      position: absolute; top: 12px; left: 12px; background: var(--pink); color: white;
+      font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 6px;
+      text-transform: uppercase; letter-spacing: 0.5px; z-index: 3;
+    }
+    /* ===== END SHOPIFY IMAGE SLOT ===== */
+
+    .product-info { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+    .product-info h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .product-info .desc { color: #999; font-size: 0.9rem; margin-bottom: 0.9rem; flex: 1; }
+    .size-select { margin-bottom: 0.9rem; }
+    .size-select label { display: block; font-size: 0.8rem; color: #aaa; margin-bottom: 0.35rem; font-weight: 600; }
+    .size-select select {
+      width: 100%; background: #0d0d0d; border: 1px solid #333; color: white; padding: 0.55rem 0.8rem;
+      border-radius: 10px; font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ff2d8b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 0.8rem center; transition: border-color 0.2s;
+    }
+    .size-select select:focus { outline: none; border-color: var(--pink); }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+    .price { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--pink); }
+    .add-btn {
+      background: var(--pink); color: white; border: none; padding: 0.55rem 1.1rem; border-radius: 50px;
+      font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .add-btn:hover { background: var(--pink-light); transform: scale(1.05); }
+    .add-btn.added { background: #22c55e; }
+    .about {
+      background: var(--dark); border-radius: 24px; padding: 3rem 2rem;
+      border: 1px solid #2a2a2a; text-align: center;
+    }
+    .about-text h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; margin-bottom: 1rem; letter-spacing: 1px; }
+    .about-text p { color: #bbb; margin-bottom: 1rem; font-size: 1.05rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .about-stats { display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; justify-content: center; }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--pink); }
+    .stat-label { font-size: 0.85rem; color: #888; }
+    footer { background: #080808; border-top: 2px solid var(--pink); padding: 3rem 1.5rem 2rem; margin-top: 3rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; }
+    .footer-brand .logo-text { font-size: 1.6rem; margin-bottom: 0.8rem; display: block; }
+    .footer-brand p { color: #777; font-size: 0.95rem; max-width: 280px; }
+    .footer-col h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--pink); margin-bottom: 1rem; }
+    .footer-col a, .footer-col p { display: block; color: #999; text-decoration: none; font-size: 0.95rem; margin-bottom: 0.5rem; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--pink); }
+    .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid #222; text-align: center; color: #555; font-size: 0.85rem; }
+    .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; opacity: 0; visibility: hidden; transition: all 0.3s; }
+    .cart-overlay.open { opacity: 1; visibility: visible; }
+    .cart-sidebar {
+      position: fixed; top: 0; right: 0; width: 100%; max-width: 380px; height: 100%;
+      background: var(--dark); z-index: 210; transform: translateX(100%); transition: transform 0.3s;
+      display: flex; flex-direction: column; border-left: 2px solid var(--pink);
+    }
+    .cart-overlay.open .cart-sidebar { transform: translateX(0); }
+    .cart-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+    .cart-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; }
+    .close-cart { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+    .cart-items { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+    .cart-item { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #2a2a2a; }
+    .cart-item-info { flex: 1; }
+    .cart-item-info h4 { font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .cart-item-info .size-tag {
+      display: inline-block; background: rgba(255,45,139,0.15); color: var(--pink);
+      font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 6px; margin-bottom: 0.3rem;
+    }
+    .cart-item-info .price { font-size: 1.1rem; }
+    .cart-empty { text-align: center; padding: 3rem 1rem; color: #666; }
+    .cart-empty span { font-size: 3rem; display: block; margin-bottom: 0.5rem; }
+    .cart-footer { padding: 1.2rem 1.5rem; border-top: 1px solid #333; }
+    .cart-total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
+    .cart-total span:last-child { color: var(--pink); font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; }
+    .checkout-btn {
+      width: 100%; background: var(--pink); color: white; border: none; padding: 1rem; border-radius: 50px;
+      font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: background 0.2s;
+    }
+    .checkout-btn:hover { background: var(--pink-light); }
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: var(--pink); color: white; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: 600;
+      z-index: 300; opacity: 0; transition: all 0.3s; box-shadow: 0 8px 30px rgba(255, 45, 139, 0.4);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .menu-toggle { display: block; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .hero { padding: 3rem 1rem 4rem; }
+    }
+    .float-flamingo {
+      position: fixed; bottom: 20px; right: 20px; font-size: 2.5rem;
+      animation: float 3s ease-in-out infinite; cursor: pointer; z-index: 50;
+      filter: drop-shadow(0 4px 8px rgba(255,45,139,0.4));
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-12px) rotate(5deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    ============================================
+    SHOPIFY HINWEIS – Bilder einbinden:
+    --------------------------------------------
+    1. Produkt in Shopify anlegen und Bild hochladen
+    2. Bild-URL kopieren (Rechtsklick auf Produktbild → Bildadresse kopieren)
+       ODER in einem Liquid-Section:
+         src="{{ product.featured_image | image_url: width: 800 }}"
+    3. Die src="" der jeweiligen <img> ersetzen
+    ============================================
+  -->
+
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <div class="logo-text">Fla<span>MEN</span>gos</div>
+      </a>
+      <nav>
+        <a href="#shop">Shop</a>
+        <a href="#about">Über uns</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="https://www.instagram.com/flamengos_tvl/" target="_blank" rel="noopener" class="ig-link">📸 Instagram</a>
+      </nav>
+      <button class="cart-btn" onclick="toggleCart()">🛒 Warenkorb <span class="cart-count" id="cartCount">0</span></button>
+      <button class="menu-toggle" onclick="document.querySelector('nav').style.display = document.querySelector('nav').style.display === 'flex' ? 'none' : 'flex'">☰</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-badge">🦩 Männerballett • Karneval • Langenselbold</div>
+    <h1>Fla<span class="pink">MEN</span>gos<br>Fanshop</h1>
+    <p>Pinke Flamingos, schwarze Vibes und jede Menge Karnevals-Power. Hol dir den Look der coolsten Männerballett-Truppe der Stadt!</p>
+    <div class="hero-cta">
+      <a href="#shop" class="btn btn-primary">Jetzt shoppen 🔥</a>
+      <a href="https://www.instagram.com/flamengos_tvl/" target="_blank" rel="noopener" class="btn btn-outline">📸 Folge uns</a>
+    </div>
+  </section>
+
+  <section id="shop">
+    <div class="section-header">
+      <h2>🔥 Der Shop</h2>
+      <p>Alles was das FlaMENgo-Herz begehrt – offiziell, stylisch und ready für die nächste Session</p>
+    </div>
+    <div class="products">
+
+      <!-- ========== TRIKOT ========== -->
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-badge">Bestseller</span>
+          <!-- SHOPIFY: src ersetzen mit deiner Produktbild-URL oder Liquid -->
+          <img src="" alt="FlaMENgos Match-Trikot" loading="lazy" width="600" height="600">
+          <div class="fallback">
+            <div class="emoji">👕</div>
+            <div class="label">Match-Trikot</div>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3>FlaMENgos Match-Trikot</h3>
+          <p class="desc">Schwarzes Premium-Trikot mit pinkem Flamingo-Print, Name & Nummer. Der absolute Statement-Look.</p>
+          <div class="size-select">
+            <label>Größe (EU)</label>
+            <select id="size-trikot">
+              <option value="S">S</option>
+              <option value="M" selected>M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <div class="product-footer">
+            <span class="price">49,90 €</span>
+            <button class="add-btn" onclick="addToCart('FlaMENgos Match-Trikot', 49.90, 'size-trikot')">+ In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== SPORTTASCHE ========== -->
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-badge">Neu</span>
+          <img src="" alt="FlaMENgos Sporttasche" loading="lazy" width="600" height="600">
+          <div class="fallback">
+            <div class="emoji">🎒</div>
+            <div class="label">Sporttasche</div>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3>FlaMENgos Sporttasche</h3>
+          <p class="desc">Schwarze Sporttasche mit coolen Flamingo + Bier-Motiv. Perfekt für Training, Auftritt & Aftershow.</p>
+          <div class="product-footer">
+            <span class="price">34,90 €</span>
+            <button class="add-btn" onclick="addToCart('FlaMENgos Sporttasche', 34.90)">+ In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== T-SHIRT ========== -->
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-badge">Classic</span>
+          <img src="" alt="Classic Flamingo Tee" loading="lazy" width="600" height="600">
+          <div class="fallback">
+            <div class="emoji">🦩</div>
+            <div class="label">T-Shirt</div>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3>Classic Flamingo Tee</h3>
+          <p class="desc">Schwarzes Bio-Baumwoll-Shirt mit großem pinken Flamingo-Print. Casual und trotzdem Party-ready.</p>
+          <div class="size-select">
+            <label>Größe (EU)</label>
+            <select id="size-tee">
+              <option value="S">S</option>
+              <option value="M" selected>M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <div class="product-footer">
+            <span class="price">24,90 €</span>
+            <button class="add-btn" onclick="addToCart('Classic Flamingo Tee', 24.90, 'size-tee')">+ In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== HOODIE ========== -->
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-badge">Bestseller</span>
+          <img src="" alt="FlaMENgos Hoodie" loading="lazy" width="600" height="600">
+          <div class="fallback">
+            <div class="emoji">🔥</div>
+            <div class="label">Hoodie</div>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3>FlaMENgos Hoodie</h3>
+          <p class="desc">Kuschelweicher Hoodie in Schwarz mit pinkem Logo. Für kalte Proben und heiße Afterparties.</p>
+          <div class="size-select">
+            <label>Größe (EU)</label>
+            <select id="size-hoodie">
+              <option value="S">S</option>
+              <option value="M" selected>M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <div class="product-footer">
+            <span class="price">54,90 €</span>
+            <button class="add-btn" onclick="addToCart('FlaMENgos Hoodie', 54.90, 'size-hoodie')">+ In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== BAUCHTASCHE ========== -->
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-badge">Neu</span>
+          <img src="" alt="FlaMENgos Bauchtasche" loading="lazy" width="600" height="600">
+          <div class="fallback">
+            <div class="emoji">👜</div>
+            <div class="label">Bauchtasche</div>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3>FlaMENgos Bauchtasche</h3>
+          <p class="desc">Schwarze Bauchtasche mit pinkem Flamingo-Print. Hände frei fürs Tanzen, Feiern und Bier holen.</p>
+          <div class="product-footer">
+            <span class="price">27,90 €</span>
+            <button class="add-btn" onclick="addToCart('FlaMENgos Bauchtasche', 27.90)">+ In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== TRINKBECHER ========== -->
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-badge">Party</span>
+          <img src="" alt="FlaMENgos Trinkbecher" loading="lazy" width="600" height="600">
+          <div class="fallback">
+            <div class="emoji">🥤</div>
+            <div class="label">Trinkbecher</div>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3>FlaMENgos Trinkbecher</h3>
+          <p class="desc">Robuster Becher mit Flamingo-Motiv. Fürs Training, die Sitzung und den ganzen Karneval – wiederverwendbar & stylish.</p>
+          <div class="product-footer">
+            <span class="price">12,90 €</span>
+            <button class="add-btn" onclick="addToCart('FlaMENgos Trinkbecher', 12.90)">+ In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CAP ========== -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="" alt="Pink Cap FlaMENgos" loading="lazy" width="600" height="600">
+          <div class="fallback">
+            <div class="emoji">🧢</div>
+            <div class="label">Cap</div>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3>Pink Cap „FlaMENgos“</h3>
+          <p class="desc">Snapback in Schwarz mit gesticktem pinken Logo. Der ultimative Headpiece für jeden Auftritt.</p>
+          <div class="product-footer">
+            <span class="price">22,90 €</span>
+            <button class="add-btn" onclick="addToCart('Pink Cap FlaMENgos', 22.90)">+ In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== SCHAL ========== -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="" alt="Karnevals-Schal" loading="lazy" width="600" height="600">
+          <div class="fallback">
+            <div class="emoji">🧣</div>
+            <div class="label">Schal</div>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3>Karnevals-Schal</h3>
+          <p class="desc">Zweifarbiger Schal in Schwarz & Pink. Zeig Farbe auf der Straße und im Saal!</p>
+          <div class="product-footer">
+            <span class="price">18,90 €</span>
+            <button class="add-btn" onclick="addToCart('Karnevals-Schal', 18.90)">+ In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about">
+      <div class="about-text">
+        <h2>Wer zum Flamingo sind wir?</h2>
+        <p>Die <strong>FlaMENgos</strong> sind das Männerballett des TV 1886 Langenselbold. Wir tanzen, wir feiern, wir rocken den Karneval – und das mit pinker Attitude und schwarzem Stil.</p>
+        <p>Seit Jahren bringen wir den Saal zum Kochen. Unser Fanshop ist für alle, die den Vibe mit nach Hause nehmen wollen.</p>
+        <div class="about-stats">
+          <div class="stat"><div class="stat-num">1886</div><div class="stat-label">Seit TV gegründet</div></div>
+          <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Pink Power</div></div>
+          <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Gute Laune</div></div>
+        </div>
+        <p style="margin-top: 1.5rem;">
+          <a href="https://www.instagram.com/flamengos_tvl/" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 0.95rem; padding: 0.7rem 1.4rem;">📸 Folge den FlaMENgos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" style="text-align: center;">
+    <div class="section-header">
+      <h2>Schreib uns, Flamingo!</h2>
+      <p>Fragen zu Größen, Bestellungen oder einfach nur Liebe schicken? Wir sind da.</p>
+    </div>
+    <p style="color: #999; margin-bottom: 1.5rem;">
+      📧 fanshop@flamengos-langenselbold.de<br>
+      📍 TV 1886 Langenselbold • Männerballett FlaMENgos<br>
+      📸 <a href="https://www.instagram.com/flamengos_tvl/" target="_blank" rel="noopener" style="color: var(--pink); text-decoration: none;">@flamengos_tvl</a>
+    </p>
+    <a href="mailto:fanshop@flamengos-langenselbold.de" class="btn btn-primary">Nachricht schicken 💌</a>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-text">Fla<span>MEN</span>gos</span>
+        <p>Der offizielle Fanshop des Männerballetts vom TV 1886 Langenselbold. Pink. Schwarz. Unstoppable.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="#shop">Trikots</a>
+        <a href="#shop">Taschen & Bauchtaschen</a>
+        <a href="#shop">Becher & Accessoires</a>
+        <a href="#shop">Hoodies & Caps</a>
+      </div>
+      <div class="footer-col">
+        <h4>Mehr</h4>
+        <a href="#about">Über uns</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="https://www.instagram.com/flamengos_tvl/" target="_blank" rel="noopener">📸 Instagram</a>
+        <p>Karnevalsverein Langenselbold</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 FlaMENgos • TV 1886 Langenselbold • Made with 🩷 & 🦩</div>
+  </footer>
+
+  <div class="cart-overlay" id="cartOverlay" onclick="if(event.target===this) toggleCart()">
+    <div class="cart-sidebar">
+      <div class="cart-header">
+        <h3>Dein Warenkorb 🛒</h3>
+        <button class="close-cart" onclick="toggleCart()">✕</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <div class="cart-empty"><span>🦩</span>Noch nichts drin… Zeit zum Shoppen!</div>
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total"><span>Gesamt</span><span id="cartTotal">0,00 €</span></div>
+        <button class="checkout-btn" onclick="checkout()">Zur Kasse (Demo) 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Hinzugefügt! 🦩</div>
+  <div class="float-flamingo" onclick="alert('🦩 FlaMENgos forever! Pink Power, Baby!')" title="Klick mich!">🦩</div>
+
+  <script>
+    let cart = [];
+    function addToCart(name, price, sizeSelectId) {
+      let size = null;
+      if (sizeSelectId) {
+        const select = document.getElementById(sizeSelectId);
+        if (select) size = select.value;
+      }
+      cart.push({ name, price, size });
+      updateCart();
+      const sizeText = size ? ` (Größe ${size})` : '';
+      showToast(name + sizeText + ' ist im Korb! 🔥');
+      const btn = event.target;
+      btn.classList.add('added');
+      btn.textContent = '✓ Dabei!';
+      setTimeout(() => { btn.classList.remove('added'); btn.textContent = '+ In den Warenkorb'; }, 1500);
+    }
+    function updateCart() {
+      const countEl = document.getElementById('cartCount');
+      const itemsEl = document.getElementById('cartItems');
+      const totalEl = document.getElementById('cartTotal');
+      countEl.textContent = cart.length;
+      if (cart.length === 0) {
+        itemsEl.innerHTML = '<div class="cart-empty"><span>🦩</span>Noch nichts drin… Zeit zum Shoppen!</div>';
+        totalEl.textContent = '0,00 €';
+        return;
+      }
+      let total = 0;
+      itemsEl.innerHTML = cart.map((item, i) => {
+        total += item.price;
+        const sizeHtml = item.size ? `<div class="size-tag">Größe ${item.size}</div>` : '';
+        return `<div class="cart-item"><div class="cart-item-info"><h4>${item.name}</h4>${sizeHtml}<div class="price">${item.price.toFixed(2).replace('.', ',')} €</div></div><button onclick="removeFromCart(${i})" style="background:none;border:none;color:#ff2d8b;cursor:pointer;font-size:1.2rem;">✕</button></div>`;
+      }).join('');
+      totalEl.textContent = total.toFixed(2).replace('.', ',') + ' €';
+    }
+    function removeFromCart(index) { cart.splice(index, 1); updateCart(); }
+    function toggleCart() { document.getElementById('cartOverlay').classList.toggle('open'); }
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+    function checkout() {
+      if (cart.length === 0) { alert('Dein Warenkorb ist noch leer, Flamingo! 🦩'); return; }
+      alert('🚀 Das ist eine Demo-Seite!\n\nIn Shopify würdest du jetzt zum echten Checkout gehen.\n\nDanke für deine Liebe zu den FlaMENgos! 🩷🦩');
+      cart = []; updateCart(); toggleCart();
+    }
+  </script>
+</body>
+</html>
